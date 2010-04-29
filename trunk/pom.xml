@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <version>1.0-SNAPSHOT</version>
+    <artifactId>jmibs</artifactId>
+    <groupId>org.mili.jmibs</groupId>
+    <packaging>pom</packaging>
+
+    <name>jMibs</name>
+    <description>jMibs- a Java MIcro-Benchmarking Suite.</description>
+    <inceptionYear>2010</inceptionYear>
+
+    <developers>
+        <developer>
+            <id>michael.lieshoff (ML)</id>
+            <name>Michael Lieshoff</name>
+            <email>michaellieshoff@gmx.de</email>
+            <organization>mili.org</organization>
+            <roles>
+                <role>Developer</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+    </developers>
+    <issueManagement>
+        <system>Google Code</system>
+        <url>http://code.google.com/p/jmibs/issues/list</url>
+    </issueManagement>
+    <licenses>
+        <license>
+            <name>Apache License Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
+    </licenses>
+
+    <!--mailingLists>
+        <mailingList>
+            <name>jMibs User List</name>
+            <subscribe>
+            </subscribe>
+            <unsubscribe>
+            </unsubscribe>
+            <post>
+            </post>
+            <archive>
+            </archive>
+            <otherArchives>
+                <otherArchive>
+                </otherArchive>
+            </otherArchives>
+        </mailingList>
+    </mailingLists-->
+
+    <scm>
+        <connection>scm:svn:http://jmibs.googlecode.com/svn/trunk/jmibs</connection>
+        <developerConnection>scm:svn:https://jmibs.googlecode.com/svn/trunk/jmibs</developerConnection>
+        <url>http://code.google.com/p/jmbis/source/browse/#svn/trunk/jmibs</url>
+    </scm>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>changelog-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <excludePackageNames>*.internal*</excludePackageNames>
+                    <detectJavaApiLink>true</detectJavaApiLink>
+                    <detectLinks>true</detectLinks>
+                    <source>1.5</source>
+                    <links>
+                        <link>http://java.sun.com/j2se/1.5.0/docs/api/</link>
+                    </links>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>package-javadoc</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <modules>
+        <module>jmibs-api</module>
+        <module>jmibs-impl</module>
+        <module>jmibs-examples</module>
+        <module>jmibs-jfree</module>
+    </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.6</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.easymock</groupId>
+            <artifactId>easymock</artifactId>
+            <version>2.5.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.13</version>
+        </dependency>
+    </dependencies>
+
+    <!--distributionManagement>
+        <site>
+            <id>apache.website</id>
+            <url>scp://people.apache.org/www/maven.apache.org/ref/${project.version}/</url>
+        </site>
+    </distributionManagement-->
+</project>

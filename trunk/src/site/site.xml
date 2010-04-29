@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="jMibs">
+    <bannerRight>
+        <name>jMibs</name>
+        <href>/index.html</href>
+    </bannerRight>
+    <body>
+        <menu name="jMibs">
+            <item name="Overview" href="/index.html" />
+            <item name="Download" href="" />
+            <item name="License" href="/license.html" />
+        </menu>
+        <menu name="Development">
+            <item name="Issue Tracking" href="/issue-tracking.html" />
+            <item name="Team" href="/team-list.html" />
+            <item name="SVN repository" href="/source-repository.html" />
+        </menu>
+    </body>
+</project>
