@@ -53,9 +53,9 @@
     </mailingLists-->
 
     <scm>
-        <connection>scm:svn:http://jmibs.googlecode.com/svn/trunk/jmibs</connection>
-        <developerConnection>scm:svn:https://jmibs.googlecode.com/svn/trunk/jmibs</developerConnection>
-        <url>http://code.google.com/p/jmbis/source/browse/#svn/trunk/jmibs</url>
+        <connection>scm:svn:http://jmibs.googlecode.com/svn/trunk/jmibsparent</connection>
+        <developerConnection>scm:svn:https://jmibs.googlecode.com/svn/trunk/jmibsparent</developerConnection>
+        <url>http://code.google.com/p/jmbis/source/browse/#svn/trunk/jmibsparent</url>
     </scm>
 
     <build>
