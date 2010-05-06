@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ build.xml
+
+ 17.03.2010
+
+ Copyright 2010 Michael Lieshoff
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+ -->
+<project name="helper" default="release">
+
+    <property name="release.name" value="jmibs"/>
+    <property name="release.version" value="1.1"/>
+    <property name="release.dir" value="target"/>
+    <property name="release.file" value="${release.dir}/${release.name}-${release.version}.zip"/>
+
+    <target name="release" description="makes release.">
+        <delete dir="${release.dir}" />
+        <mkdir dir="${release.dir}" />
+        <zip destfile="${release.file}">
+            <!-- binaries -->
+            <zipfileset dir="jmibs-api/target" prefix="">
+                <include name="*.jar" />
+                <exclude name="*-javadoc.jar" />
+            </zipfileset>
+            <zipfileset dir="jmibs-impl/target" prefix="">
+                <include name="*.jar" />
+                <exclude name="*-javadoc.jar" />
+            </zipfileset>
+            <zipfileset dir="jmibs-examples/target" prefix="">
+                <include name="*.jar" />
+                <exclude name="*-javadoc.jar" />
+            </zipfileset>
+            <zipfileset dir="jmibs-jfree/target" prefix="">
+                <include name="*.jar" />
+                <exclude name="*-javadoc.jar" />
+            </zipfileset>
+            <!-- docs -->
+            <zipfileset dir="jmibs-api/target" prefix="javadocs">
+                <include name="*-javadoc.jar" />
+            </zipfileset>
+            <zipfileset dir="jmibs-impl/target" prefix="javadocs">
+                <include name="*-javadoc.jar" />
+            </zipfileset>
+            <zipfileset dir="jmibs-examples/target" prefix="javadocs">
+                <include name="*-javadoc.jar" />
+            </zipfileset>
+            <zipfileset dir="jmibs-jfree/target" prefix="javadocs">
+                <include name="*-javadoc.jar" />
+            </zipfileset>
+            <!-- sources -->
+            <zipfileset dir="jmibs-api/src/main/java" prefix="src">
+                <include name="**/*.java" />
+            </zipfileset>
+            <zipfileset dir="jmibs-impl/src/main/java" prefix="src">
+                <include name="**/*.java" />
+            </zipfileset>
+            <zipfileset dir="jmibs-examples/src/main/java" prefix="src">
+                <include name="**/*.java" />
+            </zipfileset>
+            <zipfileset dir="jmibs-jfree/src/main/java" prefix="src">
+                <include name="**/*.java" />
+            </zipfileset>
+            <!-- test-sources -->
+            <zipfileset dir="jmibs-api/src/test/java" prefix="tests/src">
+                <include name="**/*.java" />
+            </zipfileset>
+            <zipfileset dir="jmibs-impl/src/test/java" prefix="tests/src">
+                <include name="**/*.java" />
+            </zipfileset>
+            <zipfileset dir="jmibs-examples/src/test/java" prefix="tests/src">
+                <include name="**/*.java" />
+            </zipfileset>
+            <zipfileset dir="jmibs-jfree/src/test/java" prefix="tests/src">
+                <include name="**/*.java" />
+            </zipfileset>
+            <!-- test-classes -->
+            <zipfileset dir="jmibs-api/target/test-classes" prefix="tests/classes">
+                <include name="**/*.class" />
+            </zipfileset>
+            <zipfileset dir="jmibs-impl/target/test-classes" prefix="tests/classes">
+                <include name="**/*.class" />
+            </zipfileset>
+            <zipfileset dir="jmibs-examples/target/test-classes" prefix="tests/classes">
+                <include name="**/*.class" />
+            </zipfileset>
+            <zipfileset dir="jmibs-jfree/target/test-classes" prefix="tests/classes">
+                <include name="**/*.class" />
+            </zipfileset>
+        </zip>
+    </target>
+
+</project>
