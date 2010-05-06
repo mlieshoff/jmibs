@@ -3,25 +3,25 @@
     <groupId>org.mili.jmibs.examples</groupId>
     <artifactId>jmibs-examples</artifactId>
     <packaging>jar</packaging>
-    <version>1.0</version>
+    <version>1.1-SNAPSHOT</version>
     <name>jmibs-examples</name>
     <url>http://maven.apache.org</url>
     <parent>
         <groupId>org.mili.jmibs</groupId>
         <artifactId>jmibs</artifactId>
-        <version>1.0</version>
+        <version>1.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <dependencies>
         <dependency>
             <groupId>org.mili.jmibs.api</groupId>
             <artifactId>jmibs-api</artifactId>
-            <version>1.0</version>
+            <version>1.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.mili.jmibs.impl</groupId>
             <artifactId>jmibs-impl</artifactId>
-            <version>1.0</version>
+            <version>1.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>
