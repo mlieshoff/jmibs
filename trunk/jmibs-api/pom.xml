@@ -3,13 +3,13 @@
     <groupId>org.mili.jmibs.api</groupId>
     <artifactId>jmibs-api</artifactId>
     <packaging>jar</packaging>
-    <version>1.0</version>
+    <version>1.0-SNAPSHOT</version>
     <name>jmibs-api</name>
     <description>This project describes the jMibs api.</description>
     <parent>
         <groupId>org.mili.jmibs</groupId>
         <artifactId>jmibs</artifactId>
-        <version>1.0</version>
+        <version>1.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <!-- @doc jMibs/I/Introduction{jMibs is a Java micro-benchmarking suite.}-->
