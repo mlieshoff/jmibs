@@ -1,0 +1,27 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.mili.jmibs.api</groupId>
+    <artifactId>jmibs-api</artifactId>
+    <packaging>jar</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <name>jmibs-api</name>
+    <description>This project describes the jMibs api.</description>
+    <parent>
+        <groupId>org.mili.jmibs</groupId>
+        <artifactId>jmibs</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <!-- @doc jMibs/I/Introduction{jMibs is a Java micro-benchmarking suite.}-->
+    <!-- @doc jMibs/II/Getting Started Guide{This guide is intended to show about the first use
+    of jMibs and introduce in the base application.}-->
+    <!-- @doc jMibs/II/Getting Started Guide/1. What is jMibs?{jMibs is a benchmarking suite to
+    execute micro several benchmarks. It tries to answer the questions about performance. How
+    many micro-seconds my algorithm need to be completed? When i try it 10.000 times, will it
+    constant perform oder non-perform? If i uses thousands of objects in, how many seconds it
+    need to be compledted? jMibs tries to work this job. You can define own benches and
+    access own classes to check out the performance. You can extend jMibs with basic principles
+    of Java software development. The try is to make extension easy.}-->
+    <!-- @doc jMibs/II/Getting Started Guide/2. How do i setup?{Setup is easy as possible. Get
+    the jMibs archive file and use the archive on your classpath.}-->
+</project>
