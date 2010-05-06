@@ -3,13 +3,13 @@
     <groupId>org.mili.jmibs.jfree</groupId>
     <artifactId>jmibs-jfree</artifactId>
     <packaging>jar</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <name>jmibs-jfree</name>
     <url>http://maven.apache.org</url>
     <parent>
         <groupId>org.mili.jmibs</groupId>
         <artifactId>jmibs</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -22,17 +22,17 @@
         <dependency>
             <groupId>org.mili.jmibs.api</groupId>
             <artifactId>jmibs-api</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>org.mili.jmibs.impl</groupId>
             <artifactId>jmibs-impl</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>org.mili.jmibs.examples</groupId>
             <artifactId>jmibs-examples</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0</version>
         </dependency>
     </dependencies>
 </project>
