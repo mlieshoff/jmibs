@@ -353,4 +353,36 @@ public class DefaultIterationObjectLoadBenchmarkSuite extends AbstractBenchmarkS
                 + ", objectLoadList=" + objectLoadList + "]";
     }
 
+    /**
+     * creates an then runs an ad hoc benchmark suite with included benchmarks.
+     *
+     * @param name name of benchmark suite.
+     * @param rc result renderer class.
+     * @param bs list of benchmarks.
+     * @param ic iteration count.
+     * @param ol object load count.
+     * @return rendered benchmark suite result.
+     */
+    public static <T> Object createAndRun(String name,
+            Class<? extends BenchmarkSuiteResultRenderer<T>> rc, Benchmark[] bs, int[] ic,
+            int[] ol) {
+        BenchmarkSuiteResultRenderer<T> bsrs = null;
+        try {
+            bsrs = rc.newInstance();
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
+        }
+        List<Integer> l0 = new ArrayList<Integer>();
+        for (int i = 0; i < ic.length; i++) {
+            l0.add(ic[i]);
+        }
+        List<Integer> l1 = new ArrayList<Integer>();
+        for (int i = 0; i < ol.length; i++) {
+            l1.add(ol[i]);
+        }
+        IterationObjectLoadBenchmarkSuite<ObjectLoadBenchmark<?>> iolbs =
+                DefaultIterationObjectLoadBenchmarkSuite.create(name, l0, l1);
+        return bsrs.render(iolbs.execute());
+    }
+
 }
