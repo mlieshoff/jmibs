@@ -1,6 +1,6 @@
 <projectDescription>
   <name>jmibs-jfree</name>
-  <comment>jMibs is the Java micro-benchmarking system. NO_M2ECLIPSE_SUPPORT: Project files created with the maven-eclipse-plugin are not supported in M2Eclipse.</comment>
+  <comment>jMibs- a Java MIcro-Benchmarking Suite. NO_M2ECLIPSE_SUPPORT: Project files created with the maven-eclipse-plugin are not supported in M2Eclipse.</comment>
   <projects>
     <project>jmibs-api</project>
     <project>jmibs-examples</project>
