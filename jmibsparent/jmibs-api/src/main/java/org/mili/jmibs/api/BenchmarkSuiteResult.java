@@ -27,9 +27,10 @@ import java.util.*;
  * execution and preparation of benchmarking.
  *
  * @author Michael Lieshoff
- * @version 1.1 15.04.2010
+ * @version 1.2 18.06.2010
  * @since 1.0
  * @changed ML 23.04.2010 - extend by benchmark suite getter.
+ * @changed ML 18.06.2010 - added computer info methods.
  */
 public interface BenchmarkSuiteResult {
 
@@ -61,5 +62,10 @@ public interface BenchmarkSuiteResult {
      * @param br benchmark execute result.
      */
     void addExecuteResult(BenchmarkResult br);
+
+    /**
+     * @return the computer info.
+     */
+    ComputerInfo getComputerInfo();
 
 }

@@ -118,7 +118,8 @@ public class DefaultIterationObjectLoadBenchmarkContext extends DefaultBenchmark
             return false;
         if (getClass() != obj.getClass())
             return false;
-        DefaultIterationObjectLoadBenchmarkContext other = (DefaultIterationObjectLoadBenchmarkContext) obj;
+        DefaultIterationObjectLoadBenchmarkContext other =
+                (DefaultIterationObjectLoadBenchmarkContext) obj;
         if (iteration != other.iteration)
             return false;
         if (objectLoad != other.objectLoad)

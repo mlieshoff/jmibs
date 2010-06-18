@@ -29,7 +29,7 @@ import java.util.*;
  * interface.
  *
  * @author Michael Lieshoff
- * @version 1.0 12.04.2010
+ * @version 1.0 04.06.2010
  * @since 1.0
  */
 public interface IterationObjectLoadBenchmarkSuite<T extends ObjectLoadBenchmark<?>> extends

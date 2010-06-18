@@ -21,15 +21,19 @@
 package org.mili.jmibs.api;
 
 /**
+ * This interface describes a function to prepare.
+ *
  * @author Michael Lieshoff
  * @version 1.0 06.05.2010
  * @since 1.1
  */
-public interface PrepareFunction {
+public interface PrepareFunction<T> {
 
     /**
-     * prepares.
+     * prepares on specified context.
+     *
+     * @param ctx context.
      */
-    void prepare();
+    void prepare(T ctx);
 
 }

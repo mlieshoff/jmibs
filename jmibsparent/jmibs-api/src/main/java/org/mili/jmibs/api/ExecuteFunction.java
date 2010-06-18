@@ -21,15 +21,19 @@
 package org.mili.jmibs.api;
 
 /**
+ * This class defines a benchmark execute function.
+ *
  * @author Michael Lieshoff
  * @version 1.0 06.05.2010
  * @since 1.1
  */
-public interface ExecuteFunction {
+public interface ExecuteFunction<T> {
 
     /**
-     * executes.
+     * executes the benchmark in specified context.
+     *
+     * @param ctx context.
      */
-    void execute();
+    void execute(T ctx);
 
 }
