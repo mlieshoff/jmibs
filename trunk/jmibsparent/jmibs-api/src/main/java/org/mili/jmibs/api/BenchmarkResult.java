@@ -25,8 +25,9 @@ package org.mili.jmibs.api;
  * times in micro- and nano seconds.
  *
  * @author Michael Lieshoff
- * @version 1.0 17.03.2010
+ * @version 1.1 05.06.2010
  * @since 1.0
+ * @changed ML 05.06.2010 - formatting and added memoryInfo() methods.
  */
 public interface BenchmarkResult {
 
@@ -56,27 +57,43 @@ public interface BenchmarkResult {
     long getAverageTimeNanos();
 
     /**
-     * @param ms
-     *            total time in ms.
+     * @param ms total time in ms.
      */
     void setTotalTime(long ms);
 
     /**
-     * @param ns
-     *            total time in ns.
+     * @param ns total time in ns.
      */
     void setTotalTimeNanos(long ns);
 
     /**
-     * @param ms
-     *            average time in ms.
+     * @param ms average time in ms.
      */
     void setAverageTime(long ms);
 
     /**
-     * @param ns
-     *            average time in ns.
+     * @param ns average time in ns.
      */
     void setAverageTimeNanos(long ns);
+
+    /**
+     * @param mi the memory info before.
+     */
+    void setMemoryInfoBefore(MemoryInfo mi);
+
+    /**
+     * @return the memory info before.
+     */
+    MemoryInfo getMemoryInfoBefore();
+
+    /**
+     * @param mi the memory info after.
+     */
+    void setMemoryInfoAfter(MemoryInfo mi);
+
+    /**
+     * @return the memory info after.
+     */
+    MemoryInfo getMemoryInfoAfter();
 
 }

@@ -31,22 +31,39 @@ import org.mili.jmibs.api.*;
  * @version 1.1 15.04.2010
  * @since 1.0
  * @changed ML 23.04.2010 - extended name.
+ * @changed ML 04.06.2010 - set addBenchmarkClass(), getBenchmarkClassList() deprecated and adds
+ *          addBenchmark() and getBenchmarkList()
  */
 public abstract class AbstractBenchmarkSuite implements BenchmarkSuite {
 
     private String name = "";
     private List<Class<?>> benchmarkClassList = new ArrayList<Class<?>>();
+    private List<Benchmark> benchmarkList = new ArrayList<Benchmark>();
 
     @Override
     public void addBenchmarkClass(Class<?> cls) {
         this.benchmarkClassList.add(cls);
     }
 
+    @Override
+    public void addBenchmark(Benchmark b) {
+        this.benchmarkList.add(b);
+    }
+
     /**
      * @return the list of benchmark classes
+     * @deprecated use getBenchmarkList()
      */
+    @Deprecated
     public List<Class<?>> getBenchmarkClassList() {
         return benchmarkClassList;
+    }
+
+    /**
+     * @return the list of benchmarks.
+     */
+    public List<Benchmark> getBenchmarkList() {
+        return benchmarkList;
     }
 
     @Override

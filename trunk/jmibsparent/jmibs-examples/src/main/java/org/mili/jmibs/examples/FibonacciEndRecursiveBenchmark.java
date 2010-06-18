@@ -28,8 +28,9 @@ import org.mili.jmibs.impl.*;
  * @author Michael Lieshoff
  * @version 1.0 29.04.2010
  * @since 1.0
+ * @changed ML 06.06.2010 - turn into interval bench.
  */
-public class FibonacciEndRecursiveBenchmark extends AbstractObjectLoadBenchmark<String> {
+public class FibonacciEndRecursiveBenchmark extends AbstractIntervalBenchmark<IntegerInterval> {
 
     /**
      * creates a new end recursive fib benchmark.
@@ -39,20 +40,20 @@ public class FibonacciEndRecursiveBenchmark extends AbstractObjectLoadBenchmark<
         this.setName("Fibonacci: end-recursive");
     }
 
-    private int fib0(int x, int y, int i, int n) {
+    public static int fib0(int x, int y, int i, int n) {
         if (i > n)
             return y;
         else
             return fib0(y, x + y, i + 1, n);
     }
 
-    private int fib(int n) {
+    public static int fib(int n) {
         return fib0(1, 1, 2, n);
     }
 
     @Override
     public void execute() {
-        this.fib(this.getObjectLoad());
+        fib(this.getInterval().getValue());
     }
 
     @Override

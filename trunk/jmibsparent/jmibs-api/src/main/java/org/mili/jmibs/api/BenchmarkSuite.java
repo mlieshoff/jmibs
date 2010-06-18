@@ -27,15 +27,25 @@ package org.mili.jmibs.api;
  * @version 1.1 15.04.2010
  * @since 1.0
  * @changed ML 23.04.2010 - extended by getName().
+ * @changed ML 04.06.2010 - set addBenchmarkClass() deprecated and adds addBenchmark();
  */
 public interface BenchmarkSuite {
 
     /**
      * adds a benchmark to the suite.
      *
+     * @param cls benchmark.
+     * @deprecated use addBenchmark().
+     */
+    @Deprecated
+    void addBenchmarkClass(Class<?> cls);
+
+    /**
+     * adds a benchmark to the suite.
+     *
      * @param b benchmark.
      */
-    void addBenchmarkClass(Class<?> cls);
+    void addBenchmark(Benchmark b);
 
     /**
      * executes the suite and create a benchmark suit result.

@@ -28,20 +28,24 @@ import org.mili.jmibs.api.*;
  * This class defines a default implementation of benchmark suite result interface.
  *
  * @author Michael Lieshoff
- * @version 1.0 13.04.2010
+ * @version 1.1 18.06.2010
  * @since 1.0
+ * @changed ML 18.06.2010 - added computer info methods, modified toString(), hashCode() and
+ *          equals().
  */
 public class DefaultBenchmarkSuiteResult implements BenchmarkSuiteResult {
 
     private List<BenchmarkResult> executeResult = new ArrayList<BenchmarkResult>();
     private List<BenchmarkResult> prepareResult = new ArrayList<BenchmarkResult>();
     private BenchmarkSuite benchmarkSuite = null;
+    private ComputerInfo ci = null;
 
     /**
      * creates a new empty default benchmark suite result.
      */
     protected DefaultBenchmarkSuiteResult() {
         super();
+        this.ci = DefaultComputerInfo.create();
     }
 
     /**
@@ -89,10 +93,16 @@ public class DefaultBenchmarkSuiteResult implements BenchmarkSuiteResult {
     }
 
     @Override
+    public ComputerInfo getComputerInfo() {
+        return this.ci;
+    }
+
+    @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((benchmarkSuite == null) ? 0 : benchmarkSuite.hashCode());
+        result = prime * result + ((ci == null) ? 0 : ci.hashCode());
         result = prime * result + ((executeResult == null) ? 0 : executeResult.hashCode());
         result = prime * result + ((prepareResult == null) ? 0 : prepareResult.hashCode());
         return result;
@@ -112,6 +122,11 @@ public class DefaultBenchmarkSuiteResult implements BenchmarkSuiteResult {
                 return false;
         } else if (!benchmarkSuite.equals(other.benchmarkSuite))
             return false;
+        if (ci == null) {
+            if (other.ci != null)
+                return false;
+        } else if (!ci.equals(other.ci))
+            return false;
         if (executeResult == null) {
             if (other.executeResult != null)
                 return false;
@@ -127,7 +142,7 @@ public class DefaultBenchmarkSuiteResult implements BenchmarkSuiteResult {
 
     @Override
     public String toString() {
-        return "DefaultBenchmarkSuiteResult [benchmarkSuite=" + benchmarkSuite
+        return "DefaultBenchmarkSuiteResult [benchmarkSuite=" + benchmarkSuite + ", ci=" + ci
                 + ", executeResult=" + executeResult + ", prepareResult=" + prepareResult + "]";
     }
 

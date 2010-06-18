@@ -35,8 +35,9 @@ import org.mili.jmibs.jfree.*;
  * This class shows an example use of jFreeChart application.
  *
  * @author Michael Lieshoff
- * @version 1.0 29.04.2010
+ * @version 1.1 17.06.2010
  * @since 1.0
+ * @changed ML 17.06.2010 - removed deprecations.
  */
 public class Example6 {
 
@@ -70,9 +71,9 @@ public class Example6 {
         /* add some benches. */
         // really slow ...
         //bs.addBenchmarkClass(FibonacciRecursiveBenchmark.class);
-        bs.addBenchmarkClass(FibonacciEndRecursiveBenchmark.class);
-        bs.addBenchmarkClass(FibonacciNonRecursiveBenchmark.class);
-        bs.addBenchmarkClass(FibonacciExplicitBenchmark.class);
+        bs.addBenchmark(new FibonacciEndRecursiveBenchmark());
+        bs.addBenchmark(new FibonacciNonRecursiveBenchmark());
+        bs.addBenchmark(new FibonacciExplicitBenchmark());
 
         /* execute the suite. */
         IterationObjectLoadBenchmarkSuiteResult bsr = (IterationObjectLoadBenchmarkSuiteResult)

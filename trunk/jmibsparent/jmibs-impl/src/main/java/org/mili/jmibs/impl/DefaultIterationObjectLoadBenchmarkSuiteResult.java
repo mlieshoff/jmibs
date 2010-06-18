@@ -41,7 +41,7 @@ public class DefaultIterationObjectLoadBenchmarkSuiteResult extends DefaultBench
             new TreeMap<Integer, Map<Integer, List<BenchmarkResult>>>();
 
     /**
-     * creates a new empty default iteration object load benhmark suite result.
+     * creates a new empty default iteration object load benchmark suite result.
      */
     protected DefaultIterationObjectLoadBenchmarkSuiteResult() {
         super();

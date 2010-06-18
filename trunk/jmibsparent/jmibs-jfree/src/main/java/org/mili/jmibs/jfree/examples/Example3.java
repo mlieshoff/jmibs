@@ -35,8 +35,9 @@ import org.mili.jmibs.jfree.*;
  * This class shows an example use of jFreeChart application.
  *
  * @author Michael Lieshoff
- * @version 1.0 12.04.2010
+ * @version 1.1 17.06.2010
  * @since 1.0
+ * @changed ML 17.06.2010 - removed deprecations.
  */
 public class Example3 {
 
@@ -65,11 +66,11 @@ public class Example3 {
         BenchmarkSuite bs = DefaultIterationObjectLoadBenchmarkSuite.create(il, ol);
 
         /* add some benches. */
-        bs.addBenchmarkClass(TraverseForEachArrayListStringBenchmark.class);
-        bs.addBenchmarkClass(TraverseHighSpeedIdiomArrayListStringBenchmark.class);
-        bs.addBenchmarkClass(TraverseForEachVectorStringBenchmark.class);
-        bs.addBenchmarkClass(TraverseHighSpeedIdiomVectorStringVariableOutsideBenchmark.class);
-        bs.addBenchmarkClass(TraverseHighSpeedIdiomVectorStringBenchmark.class);
+        bs.addBenchmark(new TraverseForEachArrayListStringBenchmark());
+        bs.addBenchmark(new TraverseHighSpeedIdiomArrayListStringBenchmark());
+        bs.addBenchmark(new TraverseForEachVectorStringBenchmark());
+        bs.addBenchmark(new TraverseHighSpeedIdiomVectorStringVariableOutsideBenchmark());
+        bs.addBenchmark(new TraverseHighSpeedIdiomVectorStringBenchmark());
 
         /* execute the suite. */
         IterationObjectLoadBenchmarkSuiteResult bsr =

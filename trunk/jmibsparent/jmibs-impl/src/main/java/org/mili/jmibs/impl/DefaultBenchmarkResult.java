@@ -26,8 +26,9 @@ import org.mili.jmibs.api.*;
  * This class defines a default implementation of a benchmark result.
  *
  * @author Michael Lieshoff
- * @version 1.0 12.04.2010
+ * @version 1.1 05.06.2010
  * @since 1.0
+ * @changed ML 05.06.2010 - formatting and added memoryInfo() methods.
  */
 public class DefaultBenchmarkResult implements BenchmarkResult {
 
@@ -35,6 +36,8 @@ public class DefaultBenchmarkResult implements BenchmarkResult {
     private long averageTimeNs = 0;
     private long totalTimeMs = 0;
     private long totalTimeNs = 0;
+    private MemoryInfo memoryInfoBefore = null;
+    private MemoryInfo memoryInfoAfter = null;
     private BenchmarkContext benchmarkContext = null;
 
     /**
@@ -68,6 +71,14 @@ public class DefaultBenchmarkResult implements BenchmarkResult {
         return dbr;
     }
 
+    /**
+     * @param benchmarkContext the benchmark context to set
+     */
+    public void setBenchmarkContext(BenchmarkContext benchmarkContext) {
+        this.benchmarkContext = benchmarkContext;
+    }
+
+
     @Override
     public long getAverageTime() {
         return this.averageTimeMs;
@@ -93,37 +104,42 @@ public class DefaultBenchmarkResult implements BenchmarkResult {
         return this.totalTimeNs;
     }
 
-    /**
-     * @param benchmarkContext the benchmark context to set
-     */
-    public void setBenchmarkContext(BenchmarkContext benchmarkContext) {
-        this.benchmarkContext = benchmarkContext;
+    @Override
+    public MemoryInfo getMemoryInfoAfter() {
+        return this.memoryInfoAfter;
     }
 
-    /**
-     * @param ms average time in ms.
-     */
+    @Override
+    public MemoryInfo getMemoryInfoBefore() {
+        return this.memoryInfoBefore;
+    }
+
+    @Override
+    public void setMemoryInfoAfter(MemoryInfo mi) {
+        this.memoryInfoAfter = mi;
+    }
+
+    @Override
+    public void setMemoryInfoBefore(MemoryInfo mi) {
+        this.memoryInfoBefore = mi;
+    }
+
+    @Override
     public void setAverageTime(long ms) {
         this.averageTimeMs = ms;
     }
 
-    /**
-     * @param ns average time in ns.
-     */
+    @Override
     public void setAverageTimeNanos(long ns) {
         this.averageTimeNs = ns;
     }
 
-    /**
-     * @param ms total time in ms.
-     */
+    @Override
     public void setTotalTime(long ms) {
         this.totalTimeMs = ms;
     }
 
-    /**
-     * @param ns total time in ns.
-     */
+    @Override
     public void setTotalTimeNanos(long ns) {
         this.totalTimeNs = ns;
     }
@@ -131,8 +147,10 @@ public class DefaultBenchmarkResult implements BenchmarkResult {
     @Override
     public String toString() {
         return "DefaultBenchmarkResult [averageTimeMs=" + averageTimeMs + ", averageTimeNs="
-                + averageTimeNs + ", benchmarkContext=" + benchmarkContext + ", totalTimeMs="
-                + totalTimeMs + ", totalTimeNs=" + totalTimeNs + "]";
+                + averageTimeNs + ", benchmarkContext=" + benchmarkContext
+                + ", memoryInfoAfter=" + memoryInfoAfter + ", memoryInfoBefore="
+                + memoryInfoBefore + ", totalTimeMs=" + totalTimeMs + ", totalTimeNs="
+                + totalTimeNs + "]";
     }
 
     @Override
@@ -143,6 +161,9 @@ public class DefaultBenchmarkResult implements BenchmarkResult {
         result = prime * result + (int) (averageTimeNs ^ (averageTimeNs >>> 32));
         result = prime * result
                 + ((benchmarkContext == null) ? 0 : benchmarkContext.hashCode());
+        result = prime * result + ((memoryInfoAfter == null) ? 0 : memoryInfoAfter.hashCode());
+        result = prime * result
+                + ((memoryInfoBefore == null) ? 0 : memoryInfoBefore.hashCode());
         result = prime * result + (int) (totalTimeMs ^ (totalTimeMs >>> 32));
         result = prime * result + (int) (totalTimeNs ^ (totalTimeNs >>> 32));
         return result;
@@ -165,6 +186,16 @@ public class DefaultBenchmarkResult implements BenchmarkResult {
             if (other.benchmarkContext != null)
                 return false;
         } else if (!benchmarkContext.equals(other.benchmarkContext))
+            return false;
+        if (memoryInfoAfter == null) {
+            if (other.memoryInfoAfter != null)
+                return false;
+        } else if (!memoryInfoAfter.equals(other.memoryInfoAfter))
+            return false;
+        if (memoryInfoBefore == null) {
+            if (other.memoryInfoBefore != null)
+                return false;
+        } else if (!memoryInfoBefore.equals(other.memoryInfoBefore))
             return false;
         if (totalTimeMs != other.totalTimeMs)
             return false;

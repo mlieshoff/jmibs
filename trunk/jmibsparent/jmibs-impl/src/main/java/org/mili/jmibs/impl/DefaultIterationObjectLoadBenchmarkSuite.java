@@ -29,9 +29,10 @@ import org.mili.jmibs.api.*;
  * informations about iteration count and object loading count.
  *
  * @author Michael Lieshoff
- * @version 1.2 23/04/2010
+ * @version 1.3 16.06.2010
  * @since 1.0
  * @changed ML 23.04.2010 - fixed preparation loop, extended name create and constructor.
+ * @changed ML 15.06.2010 - fixed bad property name of warm up count.
  */
 public class DefaultIterationObjectLoadBenchmarkSuite extends AbstractBenchmarkSuite implements
         IterationObjectLoadBenchmarkSuite<ObjectLoadBenchmark<?>> {
@@ -77,8 +78,8 @@ public class DefaultIterationObjectLoadBenchmarkSuite extends AbstractBenchmarkS
      * @param iterationList list with iteration counts.
      * @param objectLoadList list with object loading counts.
      */
-    protected DefaultIterationObjectLoadBenchmarkSuite(String name,
-            List<Integer> iterationList, List<Integer> objectLoadList) {
+    protected DefaultIterationObjectLoadBenchmarkSuite(String name, List<Integer> iterationList,
+            List<Integer> objectLoadList) {
         super();
         if (iterationList == null) {
             throw new IllegalArgumentException("iteration list can't be null!");
@@ -186,27 +187,34 @@ public class DefaultIterationObjectLoadBenchmarkSuite extends AbstractBenchmarkS
          * First a virtual machine warm up phase is proceeding that tries to activate the hot
          * spot.}*/
         // warm up vm and let the hot spot.
-        int wuc = Integer.getInteger(this.getClass().getSimpleName() + ".WarmUpHotSpotCount",
-                100000);
+        int wuc = Integer.getInteger(this.getClass().getName() + ".WarmUpHotSpotCount", 100000);
         /* @doc jMibs/III/How it works?/1. Benchmark suites/Iteration object load suite(Concat){
          * By default this phase will prepare and execute a benchmark with a one object loading
          * 1.000.000 times. This integer value can be set with property
-         * &quot;org.mili.jmibs.impl.WarmUpHotSpotCount&quot;.}*/
+         * &quot;org.mili.jmibs.impl.DefaultIterationObjectLoadBenchmarkSuite.WarmUpHotSpotCount&quot;.}*/
         System.out.println("Phase: warm up VM and let the hot spot.");
+        // for legacy code only
         for (int i = 0, n = this.getBenchmarkClassList().size(); i < n; i++) {
             Class<?> cls = this.getBenchmarkClassList().get(i);
             ObjectLoadBenchmark<?> olb = null;
             try {
                 olb = (ObjectLoadBenchmark<?>) cls.newInstance();
+                this.addBenchmark(olb);
             } catch (InstantiationException e) {
                 e.printStackTrace();
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
-            olb.setObjectLoad(1);
-            for (int ii = 0; ii < wuc; ii++) {
-                olb.prepare();
-                olb.execute();
+        }
+        for (int i = 0, n = this.getBenchmarkList().size(); i < n; i++) {
+            Benchmark b = this.getBenchmarkList().get(i);
+            if (b instanceof ObjectLoadBenchmark<?>) {
+                ObjectLoadBenchmark<?> olb = (ObjectLoadBenchmark<?>) b;
+                olb.setObjectLoad(1);
+                for (int ii = 0; ii < wuc; ii++) {
+                    olb.prepare();
+                    olb.execute();
+                }
             }
         }
         /* @doc jMibs/III/How it works?/1. Benchmark suites/Iteration object load suite(Concat){
@@ -214,34 +222,22 @@ public class DefaultIterationObjectLoadBenchmarkSuite extends AbstractBenchmarkS
          * suite settings.}*/
         // traverse benches forward
         System.out.println("Phase: traverse forward");
-        for (int i = 0, n = this.getBenchmarkClassList().size(); i < n; i++) {
-            Class<?> cls = this.getBenchmarkClassList().get(i);
-            ObjectLoadBenchmark<?> olb = null;
-            try {
-                olb = (ObjectLoadBenchmark<?>) cls.newInstance();
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
+        for (int i = 0, n = this.getBenchmarkList().size(); i < n; i++) {
+            Benchmark b = this.getBenchmarkList().get(i);
+            if (b instanceof ObjectLoadBenchmark<?>) {
+                this.startBench(bsr, (ObjectLoadBenchmark<?>) b);
             }
-            this.startBench(bsr, olb);
         }
         /* @doc jMibs/III/How it works?/1. Benchmark suites/Iteration object load suite(Concat){
          * Then the suite will prepare and execute all the benchmarks again in reverse order and
          * merge the results. This ends the execution of the suite.}*/
         // traverse benches backward
         System.out.println("Phase: traverse backward");
-        for (int i = this.getBenchmarkClassList().size() - 1; i > -1; i--) {
-            Class<?> cls = this.getBenchmarkClassList().get(i);
-            ObjectLoadBenchmark<?> olb = null;
-            try {
-                olb = (ObjectLoadBenchmark<?>) cls.newInstance();
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
+        for (int i = this.getBenchmarkList().size() - 1; i > -1; i--) {
+            Benchmark b = this.getBenchmarkList().get(i);
+            if (b instanceof ObjectLoadBenchmark<?>) {
+                this.startBench(bsr, (ObjectLoadBenchmark<?>) b);
             }
-            this.startBench(bsr, olb);
         }
         return bsr;
     }
@@ -282,6 +278,8 @@ public class DefaultIterationObjectLoadBenchmarkSuite extends AbstractBenchmarkS
         DefaultBenchmarkResult dbr = DefaultBenchmarkResult.create();
         for (int i = 0; i < ic; i++) {
             DefaultBenchmarkResult dbr0 = this.execute(olb);
+            dbr.setMemoryInfoBefore(dbr0.getMemoryInfoBefore());
+            dbr.setMemoryInfoAfter(dbr0.getMemoryInfoAfter());
             dbr.setTotalTime(dbr.getTotalTime() + dbr0.getTotalTime());
             dbr.setTotalTimeNanos(dbr.getTotalTimeNanos() + dbr0.getTotalTimeNanos());
         }
@@ -292,24 +290,32 @@ public class DefaultIterationObjectLoadBenchmarkSuite extends AbstractBenchmarkS
 
     private DefaultBenchmarkResult prepare(ObjectLoadBenchmark<?> olb, int oc) {
         olb.setObjectLoad(oc);
+        MemoryInfo bmi = DefaultMemoryInfo.createActual();
         long ns = -System.nanoTime();
         long ms = -System.currentTimeMillis();
         olb.prepare();
         ms += System.currentTimeMillis();
         ns += System.nanoTime();
+        MemoryInfo ami = DefaultMemoryInfo.createActual();
         DefaultBenchmarkResult dbr = DefaultBenchmarkResult.create();
+        dbr.setMemoryInfoBefore(bmi);
+        dbr.setMemoryInfoAfter(ami);
         dbr.setTotalTime(ms);
         dbr.setTotalTimeNanos(ns);
         return dbr;
     }
 
     private DefaultBenchmarkResult execute(ObjectLoadBenchmark<?> olb) {
+        MemoryInfo bmi = DefaultMemoryInfo.createActual();
         long ns = -System.nanoTime();
         long ms = -System.currentTimeMillis();
         olb.execute();
         ms += System.currentTimeMillis();
         ns += System.nanoTime();
+        MemoryInfo ami = DefaultMemoryInfo.createActual();
         DefaultBenchmarkResult dbr = DefaultBenchmarkResult.create();
+        dbr.setMemoryInfoBefore(bmi);
+        dbr.setMemoryInfoAfter(ami);
         dbr.setTotalTime(ms);
         dbr.setTotalTimeNanos(ns);
         return dbr;
@@ -382,6 +388,9 @@ public class DefaultIterationObjectLoadBenchmarkSuite extends AbstractBenchmarkS
         }
         IterationObjectLoadBenchmarkSuite<ObjectLoadBenchmark<?>> iolbs =
                 DefaultIterationObjectLoadBenchmarkSuite.create(name, l0, l1);
+        for (int i = 0; i < bs.length; i++) {
+            iolbs.addBenchmark(bs[i]);
+        }
         return bsrs.render(iolbs.execute());
     }
 

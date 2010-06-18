@@ -24,10 +24,26 @@
     <property name="release.version" value="1.1"/>
     <property name="release.dir" value="target"/>
     <property name="release.file" value="${release.dir}/${release.name}-${release.version}.zip"/>
+    <property name="uber.file" value="${release.dir}/${release.name}-uber-${release.version}.jar"/>
 
     <target name="release" description="makes release.">
         <delete dir="${release.dir}" />
         <mkdir dir="${release.dir}" />
+        <zip destfile="${uber.file}">
+            <!-- binaries -->
+            <zipfileset dir="jmibs-api/target/classes" prefix="">
+                <include name="**/*.class" />
+            </zipfileset>
+            <zipfileset dir="jmibs-api/target/maven-archiver" prefix="pom-api">
+                <include name="pom.properties" />
+            </zipfileset>
+            <zipfileset dir="jmibs-impl/target/classes" prefix="">
+                <include name="**/*.class" />
+            </zipfileset>
+            <zipfileset dir="jmibs-impl/target/maven-archiver" prefix="pom-impl">
+                <include name="pom.properties" />
+            </zipfileset>
+        </zip>
         <zip destfile="${release.file}">
             <!-- binaries -->
             <zipfileset dir="jmibs-api/target" prefix="">

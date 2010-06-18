@@ -35,8 +35,9 @@ import org.mili.jmibs.jfree.*;
  * This class shows an example use of jFreeChart application.
  *
  * @author Michael Lieshoff
- * @version 1.0 12.04.2010
+ * @version 1.1 17.06.2010
  * @since 1.0
+ * @changed ML 17.06.2010 - removed deprecations.
  */
 public class Example2 {
 
@@ -66,8 +67,8 @@ public class Example2 {
         BenchmarkSuite bs = DefaultIterationObjectLoadBenchmarkSuite.create(il, ol);
 
         /* add some benches. */
-        bs.addBenchmarkClass(TraverseForEachArrayListStringBenchmark.class);
-        bs.addBenchmarkClass(TraverseHighSpeedIdiomArrayListStringBenchmark.class);
+        bs.addBenchmark(new TraverseForEachArrayListStringBenchmark());
+        bs.addBenchmark(new TraverseHighSpeedIdiomArrayListStringBenchmark());
 
         /* execute the suite. */
         IterationObjectLoadBenchmarkSuiteResult bsr =
@@ -75,12 +76,12 @@ public class Example2 {
 
         /* create a renderer. */
         /*
-         * @doc jMibs/II/Getting Started Guide/5. How report my results with jFree?{For
-         * jFreeChart there momently one result renderer called
+         * @doc jMibs/II/Getting Started Guide/1. Object load/4. How report my results with jFree?{
+         * To create a JFreeChart for an object load suite result, use class
          * &quot;JFreeChartBarIterationObjectLoadBenchmarkSuiteResultRenderer&quot;. It produces
          * a simple chart from your results. The application is as the string renderer. It
          * renders to an JFreeChart object. Simply switch the renderer like following:}
-         * @doc jMibs/II/Getting Started Guide/5. How report my results with jFree?(Pre){
+         * @doc jMibs/II/Getting Started Guide/1. Object load/4. How report my results with jFree?(Pre){
          * BenchmarkSuiteResultRenderer<JFreeChart> bsrr = JFreeChartBarIterationObjectLoadBenchmarkSuiteResultRenderer.create(); }
          */
         BenchmarkSuiteResultRenderer<JFreeChart> bsrr =
@@ -88,9 +89,9 @@ public class Example2 {
 
         /* display the results. */
         /*
-         * @doc jMibs/II/Getting Started Guide/5. How report my results with jFree?{This chart
-         * you can pack into a chart panel and application frame, like this:}
-         * @doc jMibs/II/Getting Started Guide/5. How report my results with jFree?(Pre){
+         * @doc jMibs/II/Getting Started Guide/1. Object load/4. How report my results with jFree?{
+         * This chart you can pack into a chart panel and application frame, like this:}
+         * @doc jMibs/II/Getting Started Guide/1. Object load/4. How report my results with jFree?(Pre){
          * ApplicationFrame af = new ApplicationFrame(bsr.getBenchmarkSuite().getName());
          * ChartPanel chartPanel = new ChartPanel(bsrr.render(bsr));
          * chartPanel.setFillZoomRectangle(true);

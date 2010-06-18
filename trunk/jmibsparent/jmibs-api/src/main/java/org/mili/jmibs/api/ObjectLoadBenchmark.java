@@ -20,7 +20,6 @@
 
 package org.mili.jmibs.api;
 
-
 /**
  * This interface defines a benchmark thats based on object loading. A benchmark handles with
  * object stores, like lists or other structures, should implements this interface.

@@ -35,8 +35,9 @@ import org.mili.jmibs.jfree.*;
  * This class shows an example use of jFreeChart application.
  *
  * @author Michael Lieshoff
- * @version 1.0 12.04.2010
+ * @version 1.1 17.06.2010
  * @since 1.0
+ * @changed ML 17.06.2010 - removed deprecations.
  */
 public class Example4 {
 
@@ -65,10 +66,10 @@ public class Example4 {
         BenchmarkSuite bs = DefaultIterationObjectLoadBenchmarkSuite.create(il, ol);
 
         /* add some benches. */
-        bs.addBenchmarkClass(AppendStringBufferBenchmark.class);
-        bs.addBenchmarkClass(AppendStringBuilderBenchmark.class);
-        bs.addBenchmarkClass(AppendStringConcatBenchmark.class);
-        bs.addBenchmarkClass(AppendStringPlusBenchmark.class);
+        bs.addBenchmark(new AppendStringBufferBenchmark());
+        bs.addBenchmark(new AppendStringBuilderBenchmark());
+        bs.addBenchmark(new AppendStringConcatBenchmark());
+        bs.addBenchmark(new AppendStringPlusBenchmark());
 
         /* execute the suite. */
         IterationObjectLoadBenchmarkSuiteResult bsr = (IterationObjectLoadBenchmarkSuiteResult)

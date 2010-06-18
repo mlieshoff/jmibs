@@ -37,6 +37,7 @@ import org.mili.jmibs.api.*;
  * @author Michael Lieshoff
  * @version 1.0 12.04.2010
  * @since 1.0
+ * @changed ML 17.06.2010 - code formatting.
  */
 public class JFreeChartBarIterationObjectLoadBenchmarkSuiteResultRenderer implements
         BenchmarkSuiteResultRenderer<JFreeChart> {
@@ -102,7 +103,6 @@ public class JFreeChartBarIterationObjectLoadBenchmarkSuiteResultRenderer implem
         domainAxis.setCategoryLabelPositions(CategoryLabelPositions
                 .createUpRotationLabelPositions(Math.PI / 6.0));
         return chart;
-
     }
 
 }

@@ -23,11 +23,12 @@ package org.mili.jmibs.impl;
 import org.mili.jmibs.api.*;
 
 /**
- * This abstract class provides some basic implmentation of benchmark interface.
+ * This abstract class provides some basic implementation of benchmark interface.
  *
  * @author Michael Lieshoff
  * @version 1.0 13.04.2010
  * @since 1.0
+ * @changed ML 05.06.2010 - documentation.
  */
 public abstract class AbstractBenchmark implements Benchmark {
 

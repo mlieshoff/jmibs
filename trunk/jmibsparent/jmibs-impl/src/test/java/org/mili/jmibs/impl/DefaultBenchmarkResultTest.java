@@ -28,8 +28,9 @@ import org.mili.jmibs.api.*;
 
 /**
  * @author Michael Lieshoff
- * @version 1.0 14.04.2010
+ * @version 1.1 15.06.2010
  * @since 1.0
+ * @changed ML 15.06.2010 - extended by memory info tests.
  */
 public class DefaultBenchmarkResultTest {
 
@@ -148,6 +149,29 @@ public class DefaultBenchmarkResultTest {
     }
 
     /**
+     * Test method for
+     * {@link org.mili.jmibs.impl.DefaultBenchmarkResult#getMemoryInfoBefore()}.
+     */
+    @Test
+    public void testGetSetMemoryInfoBefore() {
+        BenchmarkResult br = DefaultBenchmarkResult.create();
+        assertNull(br.getMemoryInfoBefore());
+    }
+
+    /**
+     * Test method for
+     * {@link org.mili.jmibs.impl.DefaultBenchmarkResult#getMemoryInfoAfter()}.
+     */
+    @Test
+    public void testGetSetMemoryInfoAfter() {
+        BenchmarkResult br = DefaultBenchmarkResult.create();
+        assertNull(br.getMemoryInfoBefore());
+        MemoryInfo mi = DefaultMemoryInfo.createActual();
+        br.setMemoryInfoBefore(mi);
+        assertEquals(mi, br.getMemoryInfoBefore());
+    }
+
+    /**
      * Test method for {@link org.mili.jmibs.impl.DefaultBenchmarkResult#toString()}.
      */
     @Test
@@ -155,6 +179,9 @@ public class DefaultBenchmarkResultTest {
         BenchmarkResult br = DefaultBenchmarkResult.create();
         assertNotNull(br.toString());
         assertTrue(br.toString().length() > 0);
+        MemoryInfo mi = DefaultMemoryInfo.createActual();
+        br.setMemoryInfoAfter(mi);
+        assertEquals(mi, br.getMemoryInfoAfter());
     }
 
 }
