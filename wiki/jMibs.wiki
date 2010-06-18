@@ -2,7 +2,7 @@
 #labels Featured
 
 
-== jMibs ==
+== jMibs 1.0 ==
 
 Michael Lieshoff
 
